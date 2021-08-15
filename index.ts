@@ -40,14 +40,15 @@ class DrawingUtil {
         const sc2 : number = ScaleUtil.divideScale(scale, 1, parts)
         const sc3 : number = ScaleUtil.divideScale(scale, 2, parts)
         const sc4 : number = ScaleUtil.divideScale(scale, 3, parts)
+        //console.log(sc1, sc2, sc3, sc4)
         context.save()
         context.translate(w / 2 + (w / 2 + size) * sc4, h / 2)
-        context.fillRect(-size * 0.5 * (sc1 - sc3), -size * 0.5 * sc1, size * (sc1 - sc3), size * sc1)
+        context.fillRect(-size * 0.5 * (sc1 - sc2), -size * 0.5 * sc1, size * (sc1 - sc2), size * sc1)
         for (let j = 0; j < 2; j++) {
             context.save()
             context.scale(1, 1 - 2 * j)
             context.rotate(sc3 * Math.PI / 4)
-            DrawingUtil.drawLine(context, 0, -size * 0.5 * sc2, 0, size * 0.5 * sc2)
+            DrawingUtil.drawLine(context, 0, 0, 0, size * 0.5 * sc2)
             context.restore()
         }
         context.restore()
@@ -57,6 +58,7 @@ class DrawingUtil {
         context.lineCap = 'round'
         context.lineWidth = Math.min(w, h) / strokeFactor 
         context.strokeStyle = colors[i]
+        context.fillStyle = colors[i]
         DrawingUtil.drawSquareToFlyLine(context, scale)
     }
 }
