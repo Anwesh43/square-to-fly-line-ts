@@ -13,3 +13,14 @@ const colors : Array<string> = [
     "#6200EA",
     "#F57F17"
 ] 
+
+class ScaleUtil {
+
+    static maxScale(scale : number, i : number, n : number) : number {
+        return Math.max(0, scale - i / n)
+    }
+
+    static divideScale(scale : number, i : number, n : number) : number {
+        return Math.min(1 / n, ScaleUtil.maxScale(scale, i, n)) * n 
+    }
+}
