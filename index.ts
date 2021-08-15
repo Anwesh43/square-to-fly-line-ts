@@ -200,3 +200,25 @@ class SquareToFlyLine {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    stfl : SquareToFlyLine = new SquareToFlyLine()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.stfl.draw(context)
+    }
+
+    handleTap(cb : Function) {
+        this.stfl.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.stfl.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+}
